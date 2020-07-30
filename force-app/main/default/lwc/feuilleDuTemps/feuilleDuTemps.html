@@ -1,0 +1,282 @@
+<template>
+    <lightning-card title="" icon-name="utility:new_event">
+        <div class="Myclass slds-no-print" style="align-self: stretch;">
+          
+            <button class=" slds-button slds-button_neutral slds-float_right" style=" background : #30A9DE ; color : white" onclick={enregistrer}>      
+                Enregistrer
+           </button>
+            <br>
+            
+        </div>
+       
+        <div class="container-fluid">    
+            <template if:true={monthView}  >
+                <div class="" style="align-self: stretch;">
+                
+                    <lightning-button
+                            style="height : 10px;"
+                             class="slds-button  slds-float_right slds-m-right_large slds-m-bottom_large"
+                             label="Ajouter Ligne"
+                              icon-name="utility:add"
+                               icon-position="left"
+                               onclick={addRow}>
+                           </lightning-button>
+                  <div></div>
+                </div>                     
+                <div >
+                 
+                    <div class="slds-col slds-size_1-of-1">        
+                        <table class=" timesheet"> 
+                            <thead style="background-color: #FFEBCD;">
+                                <tr >
+                                    
+                                    <th  scope="col">
+                                        <div class="slds-truncate" >Tache</div>
+                                    </th>
+                                    <template for:each={days}
+                                            for:item="day"
+                                            key={day}>
+                                            <th  key={day}>        
+                                                <div  >{day}</div>      
+                                            </th> 
+                                            </template>  
+                                </tr>
+                            </thead>   
+                            <tbody> 
+                               
+                                <template if:true={hasFormation}> 
+                                <tr class="slds-hint-parent">      
+                                    <td > 
+                                        <div class="slds-grid  ">
+                                            <div class="slds-col">
+                                                  
+                                                  
+                                                <lightning-combobox 
+                                                  type="combobox"
+                                                   name="Type"
+                                                   placeholder="Interne"
+                                                   options={categories}
+                                                  onchange={handleCategorieChange} >
+                                                </lightning-combobox>
+                                            </div>
+                                            <div class="slds-col">
+                                                    <lightning-combobox
+                                                    type="combobox"
+                                                     name="Type"
+                                                     options={internes}
+                                                     placeholder="Formation"
+                                                    onchange={handleInterneChange}>
+                                                  </lightning-combobox> 
+                                            </div>
+                                        </div>
+                                    </td>        
+                                    <template if:true={interneNotNull}>
+                                        <template for:each={internesList}
+                                        for:item="interne"
+                                        key={interne.Date}>      
+                                        <td data-label="Close Date" key={interne.Date}>      
+                                            <div >
+                                                <lightning-input size="1" onchange={handleDaysOfMonthChange} data-id={interne.Date} placeholder={interne.Value}>
+                                                </lightning-input>
+                                            </div>
+                                        </td> 
+                                        </template>
+                                    </template>    
+                                </tr> 
+                                </template> 
+                                <template if:true={hasEncadrement}>
+                                <tr class="slds-hint-parent">      
+                                    <td > 
+                                        <div class="slds-grid  ">
+                                            <div class="slds-col">
+                                                <lightning-combobox 
+                                                  type="combobox"
+                                                   name="Type"
+                                                   placeholder="Interne"
+                                                   options={categories}
+                                                  onchange={handleCategorieChange} >
+                                                </lightning-combobox>
+                                            </div>
+                                            <div class="slds-col">
+                                                    <lightning-combobox
+                                                    type="combobox"
+                                                     name="Type"
+                                                     options={internes}
+                                                     placeholder="Encadrement"
+                                                    onchange={handleInterneChange}>
+                                                  </lightning-combobox> 
+                                            </div>
+                                        </div>
+                                    </td>        
+                                    <template for:each={encadrement}
+                                        for:item="e"
+                                        key={e.Date}>      
+                                        <td data-label="Close Date" key={e.Date}>      
+                                            <div >
+                                                <lightning-input  onchange={handleDaysOfMonthChange} data-id={e.Date} placeholder={e.Value}>
+                                                </lightning-input>
+                                            </div>
+                                        </td> 
+                                        </template>
+                                </tr>
+                            </template>
+                            <template if:true={hasAutre}>
+                                <tr class="slds-hint-parent">      
+                                    <td > 
+                                        <div class="slds-grid ">
+                                            <div class="slds-col">
+                                                <lightning-combobox 
+                                                  type="combobox"
+                                                   name="Type"
+                                                   placeholder="Interne"
+                                                   value="Interne"
+                                                   options={categories}
+                                                  onchange={handleCategorieChange} >
+                                                </lightning-combobox>
+                                            </div>
+                                            <div class="slds-col">
+                                                    <lightning-combobox
+                                                    type="combobox"
+                                                     name="Type"
+                                                     value="Autre"
+                                                     options={internes}
+                                                     placeholder="Autre"
+                                                    onchange={handleInterneChange}>
+                                                  </lightning-combobox> 
+                                            </div>
+                                        </div>
+                                    </td>        
+                                    <template for:each={autre}
+                                        for:item="a"
+                                        key={a.Date}>      
+                                        <td data-label="Close Date" key={a.Date}>      
+                                            <div >
+                                                <lightning-input  onchange={handleDaysOfMonthChange} data-id={a.Date} placeholder={a.Value}>
+                                                </lightning-input>
+                                            </div>
+                                        </td> 
+                                        </template>
+                                </tr>
+                            </template>
+                                <template for:each={daysList} for:item="dayObj" for:index="indx">
+                                    <tr key={dayObj.key} id={dayObj.key}> 
+                                        
+                                        <td>
+                                            <div class="slds-grid ">
+                                                <div class="slds-col">
+                                                    <lightning-combobox 
+                                                      type="combobox"
+                                                       name="Type"
+                                                       placeholder="Interne"
+                                                      options={categories}
+                                                      onchange={handleCategorieChange} >
+                                                    </lightning-combobox>
+                                                </div>
+                                                <div class="slds-col">
+                                                    <div if:true={isInterne}>
+                                                        <lightning-combobox
+                                                        type="combobox"
+                                                         name="Type"
+                                                         options={internes}
+                                                         
+                                                        onchange={handleInterneChange}>
+                                                    
+                                                      </lightning-combobox> 
+                                                    </div>
+                                                    <div  if:true={isProduction}>
+                                                        <div  if:true={isProduction}>
+                                                            <lightning-combobox 
+                                                            type="combobox"
+                                                             name="Type"
+                                                            options={productions}
+                                                            onchange={handleProductionChange}>
+                                                          </lightning-combobox> 
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                  </td> 
+                                        <template for:each={days}
+                                        for:item="day"
+                                        key={day}>      
+                                        <td data-label="Close Date" key={day}>      
+                                            <div >
+                                                <lightning-input   onchange={handleDaysOfMonthChange} data-id={day} placeholder="0">
+                                                </lightning-input>
+                                            </div>
+                                        </td> 
+                                        </template>
+                                      
+                                         <td>
+                                            <lightning-button-icon  icon-name="utility:delete"
+                                                                                      data-id={indx}       
+                                                                                      alternative-text="Supprimer"     
+                                                                                      class="slds-m-left_xx-small slds-m-top_x-small"
+                                                                                      onclick={removeRow} 
+                                                                                      title="Delete"></lightning-button-icon>
+                                        </td> 
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td>Absences</td>
+                                    <template for:each={absencesList}
+                                    for:item="absence"
+                                    key={absence.Key}>      
+                                    <td data-label="Close Date" key={absence.Key}>      
+                                        <div class="slds-truncate">
+                                            
+                                                <template if:true={absence.isAbsence}>
+                                                    <div class="cell filled" style="border: 2px solid lightblue;
+                                                    border-radius: 8px;
+                                                    
+                                                    margin: 0.15rem;">1</div>
+                                                </template>
+                                                <template if:false={absence.isAbsence}>
+                                                    <div style="border: 2px solid lightblue;
+                                                    border-radius: 8px;
+                                                    
+                                                    margin: 0.15rem;">0 </div>
+                                                </template>
+                                        </div>
+                                    </td> 
+                                </template>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </template>    
+        </div>
+        <div>
+            <lightning-button
+             class="slds-button slds-align_absolute-center slds-m-top_x-small"
+             label="PDF"
+              icon-name="doctype:pdf"
+               icon-position="left"
+               onclick={getPdf}>
+           </lightning-button>
+        </div>
+    </lightning-card>
+    <lightning-card>
+        <table class="timesheet" style="width: 50%; margin-left : 25%;  margin-right : 25%; ">
+            <thead style="background-color: #FFEBCD;">
+                <th style=" width: 40px;">Total Production</th>
+                <th>Total Interne</th>
+                <th>Total Absences</th>
+            </thead>
+            <tbody style="text-align: center;">
+                <tr>
+                    <td>
+                        {totalProductions}
+                    </td>
+                    <td>
+                        {totalInternes}
+                    </td>
+                    <td>
+                        {totalAbsences}
+                    </td>
+                </tr>
+            </tbody>                
+        </table>
+    </lightning-card>
+</template>

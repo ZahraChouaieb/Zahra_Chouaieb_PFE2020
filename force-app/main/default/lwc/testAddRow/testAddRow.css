@@ -1,0 +1,50 @@
+.tablecol th{
+    background-color: #30A9DE;
+    color: white;
+    text-align: center;
+}
+.Myclass{
+    margin-bottom: 3%;
+    margin-top: 1%;
+    margin-right: 2%;
+    margin-left: 2%;
+    border-bottom-style: 5px solid gray;
+    display: flex;
+    justify-content: flex-end;
+    align-content: space-around;
+    
+}
+/*.monthTable{
+    width:500px;
+}*/
+.hh th{
+    width:2%;
+}
+.timesheet{
+    margin-top: 0%;
+    margin-bottom: 0%;
+
+}
+.monthTable tr td {
+    width: 40px;
+} 
+.timesheet th,
+.timesheet td {
+    text-align: center;
+    padding: 1rem 0;
+    font-weight: bold;
+}
+.selectWrapper{
+    border-radius:36px;
+    display:inline-block;
+    overflow:hidden;
+    background:#cccccc;
+    border:1px solid #cccccc;
+  }
+  .selectBox{
+    width:140px;
+    height:40px;
+    border:0px;
+    outline:none;
+   
+  }

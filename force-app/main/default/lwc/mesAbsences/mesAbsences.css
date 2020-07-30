@@ -1,0 +1,13 @@
+.tablecol th{
+    background-color: #30A9DE;
+    color: white;
+    text-align: center;
+}
+.Myclass{
+    margin-bottom: 2%;
+    margin-right: 2%;
+    margin-left: 2%;
+    border: hidden;
+    border-bottom-style: 5px solid gray;
+    
+}

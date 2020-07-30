@@ -1,0 +1,84 @@
+<template>
+    <div if:true={isLoaded} class="cstm-spinner">
+		<lightning-spinner alternative-text="Loading..."></lightning-spinner>
+    </div>
+    <lightning-card >
+                  
+    <div class="slds-m-around--xx-large container-fluid">
+        <div class="slds-float_right slds-p-bottom_small">
+            <h1 class="slds-page-header__title">Add Row
+                <lightning-button-icon icon-name="utility:add"  size="large" variant="bare" alternative-text="Add" onclick={addRow}> </lightning-button-icon>
+            </h1>
+        </div>
+        <div class="slds-card__body_inner timesheet">        
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered tablecol monthTable"> 
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        
+                        <th scope="col">
+                            <div class="slds-truncate" title="Account Name">Catégorie</div>
+                        </th>
+                        <template for:each={days}
+                                for:item="day"
+                                key={day}>
+                                <th  scope="col" key={day}>        
+                                    <div class="slds-truncate" title="Account Name">{day}</div>      
+                                </th> 
+                                </template>  
+                        <th scope="col">
+                            <div class="slds-truncate" title="Action">Total</div>
+                        </th>
+                    </tr>
+                </thead>   
+                <tbody>      
+                    
+                    <template for:each={accountList} for:item="acc" for:index="indx">
+                        <tr key={acc.key} id={acc.key}> 
+                            <td> <div>       
+                                <lightning-combobox 
+                                  type="combobox"
+                                   name="Type"
+                                   value={valueCategorie}
+                                  options={categories}
+                                  onchange={handleCategorieChange}>
+                                </lightning-combobox>  
+                        </div>  </td> 
+                            <template for:each={days}
+                            for:item="day"
+                            key={day}>      
+                            <td data-label="Close Date" key={day}>      
+                                <div class="slds-truncate">
+                                    <lightning-input onchange={handleDaysOfMonthChange} data-id={day}>
+                                    </lightning-input>
+                                </div>
+                            </td> 
+                            </template>
+                          
+                            <td>
+                                <div class="slds-truncate">
+                                    <lightning-input type="number"  value={nbHeures} onchange={handleNbHeuresChange}>
+                                    </lightning-input> 
+                                </div>
+                                
+                            </td> 
+                          
+                             <td>
+                                <lightning-button-icon icon-name="utility:delete"
+																		  data-id={indx}       
+																		  alternative-text="Delete"     
+																		  class="slds-m-left_xx-small"
+																		  onclick={removeRow} 
+																		  title="Delete"></lightning-button-icon>
+                            </td> 
+                        </tr>
+                    </template>
+                     
+                </tbody>
+            </table>
+            <div class="slds-align_absolute-center slds-p-top_small">                
+                <lightning-button name="Save" label="Save" onclick={saveRecord} ></lightning-button>
+            </div>
+        </div>
+    </div>
+</lightning-card>
+</template>

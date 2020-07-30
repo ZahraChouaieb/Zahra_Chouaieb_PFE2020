@@ -1,0 +1,12 @@
+<template>
+<lightning-layout>
+<lightning-layout-item size="12" margin="around-small">
+        <lightning-datatable data={timesheets} columns={columns} key-field="Id" onrowaction={handleRowAction} hide-checkbox-column="true">
+        </lightning-datatable>
+    </lightning-layout-item>
+</lightning-layout>
+<!-- <lightning-card>
+    <c-paginator onprevious={previousHandler} onnext={nextHandler}></c-paginator>
+  </lightning-card> -->
+
+</template>

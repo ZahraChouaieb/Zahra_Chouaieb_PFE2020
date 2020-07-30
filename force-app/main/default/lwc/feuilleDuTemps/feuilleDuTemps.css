@@ -1,0 +1,105 @@
+/* .tablecol th{
+    background-color: #30A9DE;
+    color: white;
+    text-align: center;
+} */
+.header-card{
+    background-color: #30A9DE;
+    color: white;
+    text-align: center;
+}
+.Myclass{
+    margin-bottom: 3%;
+    margin-top: 1%;
+    margin-right: 2%;
+    margin-left: 2%;
+    border-bottom-style: 5px solid gray;
+    display: flex;
+    justify-content: flex-end;
+    align-content: space-around;
+    
+}
+/* .monthTable{
+    width:1000px;
+} */
+.hh th{
+    width:2%;
+    padding : 1%;
+}
+/* .timesheet{
+    margin-top: 0%;
+    margin-bottom: 0%;
+
+} */
+.monthTable tr td {
+    width: 40px;
+} 
+/* .timesheet th,
+.timesheet td {
+    text-align: center;
+    padding: 1rem 0;
+    font-weight: bold;
+} */
+
+.timesheet th,
+.timesheet td {
+    text-align: center;
+    padding: 0.50rem 0;
+    font-weight: bold;
+}
+.timesheet th {
+    border: 0px solid;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.timesheet tr:last-child td {
+    border: 0px solid;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.timesheet tr td {
+    width: 40px;
+}
+
+.timesheet tr td:first-child {
+    width: 200px;
+}
+
+.timesheet .td {
+    border: 2px solid lightblue;
+    border-radius: 8px;
+    /* padding: 0.25rem; */
+    margin: 0.15rem;
+}
+
+.timesheet .cell.filled {
+    background-color: lightblue;
+}
+
+.timesheet .column {
+    background-color: #FFEBCD;
+    border-radius: 8px;
+}
+
+.timesheet .column.holiday {
+    background-color: #FAFAD2;
+}
+
+
+/* .selectWrapper{
+    border-radius:36px;
+    display:inline-block;
+    overflow:hidden;
+    background:#cccccc;
+    border:1px solid #cccccc;
+  }
+  .selectBox{
+    width:140px;
+    height:40px;
+    border:0px;
+    outline:none;
+   
+  } */
+ 
